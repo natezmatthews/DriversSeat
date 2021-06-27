@@ -17,5 +17,6 @@ export interface Expense {
     name: string,
     date: string,
     cost: number,
-    category: Category
+    category: Category,
+    note: string
 }

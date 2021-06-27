@@ -15,7 +15,6 @@ const data = {
 };
 
 const options = {
-    maintainAspectRatio: false,
     scales: {
         y: {
             title: {
@@ -28,8 +27,8 @@ const options = {
                 display: true,
                 text: 'Days'
             }
-        },
-    },
+        }
+    }
 };
 
 const LineChart = () => (
@@ -37,8 +36,6 @@ const LineChart = () => (
         <Line
             type="line"
             data={data}
-            width={10}
-            height={10}
             options={options}
         />
     </>
