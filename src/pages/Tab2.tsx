@@ -42,8 +42,9 @@ function unmetRequirements(fieldsToValidate: Dictionary<ValueAndValidator<any>>)
 }
 
 function onClick(
-  presentToast: (message: string, duration: number) => void,
   dispatch: AppDispatch,
+  clearForm: () => void,
+  presentToast: (message: string, duration: number) => void,
   name?: string,
   cost?: number,
   category?: Category,
@@ -74,6 +75,7 @@ function onClick(
         note: note!
       })
     )
+    clearForm();
   }
 }
 
@@ -85,6 +87,13 @@ const Tab2: React.FC = () => {
   const [cost, setCost] = useState<number>();
   const [category, setCategory] = useState<Category>();
   const [note, setNote] = useState<string>();
+
+  function clearForm() {
+    setName(undefined);
+    setCost(undefined);
+    setCategory(undefined);
+    setNote(undefined);
+  }
 
   return (
     <IonPage>
@@ -127,7 +136,7 @@ const Tab2: React.FC = () => {
           </IonItem>
         </IonList>
         <IonButton
-          onClick={() => onClick(present, dispatch, name, cost, category, note)}
+          onClick={() => onClick(dispatch, clearForm, present, name, cost, category, note)}
         >
           Submit expense
         </IonButton>

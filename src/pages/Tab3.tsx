@@ -1,8 +1,11 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-import ExploreContainer from '../components/ExploreContainer';
+import { IonContent, IonHeader, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../redux/store';
 import './Tab3.css';
 
 const Tab3: React.FC = () => {
+  const expenses = useSelector((state: RootState) => state.items);
+
   return (
     <IonPage>
       <IonHeader>
@@ -16,7 +19,15 @@ const Tab3: React.FC = () => {
             <IonTitle size="large">Tab 3</IonTitle>
           </IonToolbar>
         </IonHeader>
-        <ExploreContainer name="Tab 3 page" />
+        <IonList>
+          {expenses.map(expense => {
+            return (
+              <IonItem>
+                <IonLabel>{expense.name}</IonLabel>
+              </IonItem>
+            )
+          })}
+        </IonList>
       </IonContent>
     </IonPage>
   );

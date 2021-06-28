@@ -1,10 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit'
-import { useDispatch } from 'react-redux'
-import expenses from './expenses'
+import { configureStore } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
+import expenses from './expenses';
 
 const store = configureStore({
   reducer: expenses,
 })
+
+export type RootState = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch
 export const useAppDispatch = () => useDispatch<AppDispatch>()
