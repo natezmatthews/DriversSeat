@@ -1,5 +1,4 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
-// import LineChart from '../components/LineChart';
 import D3 from '../components/D3';
 import './Graph.css';
 

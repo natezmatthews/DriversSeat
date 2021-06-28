@@ -8,15 +8,15 @@ import cumulative from '../src/helpers/cumulative';
 test('simple case: three-expenses', () => {
     const simple = [
         {
-            date: '2021-06-24',
+            day: 24,
             cost: 1
         },
         {
-            date: '2021-06-26',
+            day: 26,
             cost: 3
         },
         {
-            date: '2021-06-28',
+            day: 28,
             cost: 4
         }
     ];

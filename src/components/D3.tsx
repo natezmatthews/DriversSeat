@@ -1,19 +1,11 @@
-import { sortBy } from "lodash";
 import { useSelector } from "react-redux";
 import { Label, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import cumulative from "../helpers/cumulative";
-import getDayOfTheMonth from "../helpers/getDayOfTheMonth";
+import prepareData from "../helpers/prepareData";
 import { RootState } from "../redux/store";
-import { DayAndCost } from "../sharedTypes";
 
 export default function D3() {
     const expenses = useSelector((state: RootState) => state.items);
-    const daysAndCosts = expenses.map((expense): DayAndCost =>  ({
-      day: getDayOfTheMonth(expense.date),
-      cost: expense.cost
-    }));
-    const sorted = sortBy(daysAndCosts, 'day');
-    const data = cumulative(sorted);
+    const data = prepareData(expenses)
 
     return (
         <ResponsiveContainer width='90%' height='90%'>
@@ -22,7 +14,7 @@ export default function D3() {
                 margin={{ top: 20, right: 20, left: 200, bottom: 20 }}
             >
                 <YAxis dataKey="sum">
-                    <Label value="Total cumulative costs" position="left" />
+                    <Label value="Total cumulative costs" angle={-90} position="left" />
                 </YAxis>
                 <XAxis dataKey="day">
                     <Label value="Day of the month" position="bottom" />
