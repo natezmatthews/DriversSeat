@@ -11,16 +11,75 @@ import {
   IonSelect,
   IonSelectOption,
   IonTitle,
-  IonToolbar
+  IonToolbar,
+  useIonToast
 } from '@ionic/react';
+import { Dictionary, isInteger, isString } from 'lodash';
 import React, { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { recordExpense } from '../redux/expenses';
+import { AppDispatch, useAppDispatch } from '../redux/store';
 import { Category } from '../sharedTypes';
 import './Tab2.css';
 
+function validString(s: any): boolean {
+  return isString(s) && s.length > 0
+}
+
+interface ValueAndValidator<T> {
+  value: T,
+  validator: (v: T) => boolean
+}
+
+function unmetRequirements(fieldsToValidate: Dictionary<ValueAndValidator<any>>): string[] {
+  const message = [];
+  for (const field in fieldsToValidate) {
+    const { value, validator } = fieldsToValidate[field];
+    if (!validator(value)) {
+      message.push(field)
+    }
+  }
+  return message
+}
+
+function onClick(
+  presentToast: (message: string, duration: number) => void,
+  dispatch: AppDispatch,
+  name?: string,
+  cost?: number,
+  category?: Category,
+  note?: string
+): void {
+  const fieldNames = unmetRequirements({
+    'Name': {
+      value: name,
+      validator: validString
+    },
+    'Cost': {
+      value: cost,
+      validator: isInteger
+    },
+    'Category': {
+      value: category,
+      validator: (c) => Object.keys(Category).includes(c)
+    }
+  });
+  if (fieldNames.length > 0) {
+    presentToast(`Missing required fields: ${fieldNames.join(', ')}`, 5000);
+  } else {
+    dispatch(
+      recordExpense({
+        name: name!,
+        cost: cost!,
+        category: category!,
+        note: note!
+      })
+    )
+  }
+}
+
 const Tab2: React.FC = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+  const [present, _] = useIonToast();
 
   const [name, setName] = useState<string>();
   const [cost, setCost] = useState<number>();
@@ -68,14 +127,7 @@ const Tab2: React.FC = () => {
           </IonItem>
         </IonList>
         <IonButton
-          onClick={() => dispatch(
-            recordExpense({
-              name: name!,
-              cost: cost!,
-              category: category!,
-              note: note!
-            })
-          )}
+          onClick={() => onClick(present, dispatch, name, cost, category, note)}
         >
           Submit expense
         </IonButton>
