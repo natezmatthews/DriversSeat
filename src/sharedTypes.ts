@@ -20,3 +20,8 @@ export interface Expense {
     category: Category,
     note: string
 }
+
+export interface DayAndCost {
+    day: number,
+    cost: number
+}

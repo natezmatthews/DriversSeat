@@ -1,28 +1,35 @@
-import { Line, LineChart, Tooltip, XAxis } from "recharts";
-
-const data2 = [
-    { x: 1, y: 1 },
-    { x: 2, y: 2 },
-    { x: 3, y: 3 },
-    { x: 4, y: 5 },
-    { x: 5, y: 7 },
-    { x: 6, y: 12 },
-    { x: 7, y: 19 },
-    { x: 8, y: 31 }
-]
+import { sortBy } from "lodash";
+import { useSelector } from "react-redux";
+import { Label, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import cumulative from "../helpers/cumulative";
+import getDayOfTheMonth from "../helpers/getDayOfTheMonth";
+import { RootState } from "../redux/store";
+import { DayAndCost } from "../sharedTypes";
 
 export default function D3() {
+    const expenses = useSelector((state: RootState) => state.items);
+    const daysAndCosts = expenses.map((expense): DayAndCost =>  ({
+      day: getDayOfTheMonth(expense.date),
+      cost: expense.cost
+    }));
+    const sorted = sortBy(daysAndCosts, 'day');
+    const data = cumulative(sorted);
+
     return (
-        <LineChart
-            width={800}
-            height={400}
-            data={data2}
-            margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
-        >
-            <XAxis dataKey="name" />
-            <Tooltip />
-            {/* <CartesianGrid stroke="#f5f5f5" /> */}
-            <Line type="monotone" dataKey="y" stroke="#ff7300" yAxisId={0} />
-        </LineChart>
+        <ResponsiveContainer width='90%' height='90%'>
+            <LineChart
+                data={data}
+                margin={{ top: 20, right: 20, left: 200, bottom: 20 }}
+            >
+                <YAxis dataKey="sum">
+                    <Label value="Total cumulative costs" position="left" />
+                </YAxis>
+                <XAxis dataKey="day">
+                    <Label value="Day of the month" position="bottom" />
+                </XAxis>
+                <Tooltip />
+                <Line type="monotone" dataKey="sum" stroke="#ff7300" yAxisId={0} />
+            </LineChart>
+        </ResponsiveContainer>
     )
 }
