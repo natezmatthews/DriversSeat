@@ -1,4 +1,6 @@
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+// import LineChart from '../components/LineChart';
+import D3 from '../components/D3';
 import ExploreContainer from '../components/ExploreContainer';
 import './Graph.css';
 
@@ -17,6 +19,7 @@ const Graph: React.FC = () => {
           </IonToolbar>
         </IonHeader>
         <ExploreContainer name="Graph page" />
+        <D3 />
         {/* <LineChart /> */}
       </IonContent>
     </IonPage>
