@@ -6,11 +6,15 @@ interface ValueAndValidator<T> {
   }
   
 export default function unmetRequirements(fieldsToValidate: Dictionary<ValueAndValidator<any>>): string[] {
+    /**
+     * Accumulate an array of fieldnames whose values did not pass their validator
+     */
+    
     const message = [];
     for (const field in fieldsToValidate) {
         const { value, validator } = fieldsToValidate[field];
         if (!validator(value)) {
-        message.push(field)
+            message.push(field)
         }
     }
     return message

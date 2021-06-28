@@ -1,4 +1,4 @@
-import dateIsInCurrentMonthAndYear from '../src/helpers/dateIsInCurrentMonthAndYear';
+import dateIsInCurrentMonthAndYear from '../src/dateHelpers/dateIsInCurrentMonthAndYear';
 
 test('current year and month', () => {
     const now = new Date();

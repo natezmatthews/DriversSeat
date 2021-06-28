@@ -1,4 +1,4 @@
-import cumulative from '../src/helpers/cumulative';
+import cumulative from '../src/helpers/cumulativeSpending';
 
 /** DATA GENERATOR FOR EXPECTED RESULTS
  * Copy this into a console to get an array of form [{ day: 1, sum: 0 }...<days 2-30>...{ day: 31, sum: 0 }]

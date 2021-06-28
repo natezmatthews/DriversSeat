@@ -25,3 +25,8 @@ export interface DayAndCost {
     day: number,
     cost: number
 }
+
+export interface DayAndSum {
+    day: number,
+    sum: number
+}

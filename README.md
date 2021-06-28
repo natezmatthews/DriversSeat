@@ -41,7 +41,7 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
 
 ## Steps to run the application in the future
 ### If there have been changes to the repository
-1. Pull down the new changes using `git pull`. If you encounter an error, ask for help, since there are too many possible errors to capture in this README.
+1. Pull down the new changes using `git pull`. If you encounter an error, ask for help, since there are too many possible errors to address in this README.
 1. Run `npm install` again, since there may be new dependencies to install, or old dependencies to update.
 1. Start the application: `npm start`
 

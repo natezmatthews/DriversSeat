@@ -1,11 +1,16 @@
 import { useSelector } from "react-redux";
 import { Label, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
-import prepareData from "../helpers/prepareData";
+import prepareDataForChart from "../helpers/prepareDataForChart";
 import { RootState } from "../redux/store";
 
-export default function D3() {
+export default function Chart() {
+    /**
+     * A graph of total spending for the current calendar month, plotting with Days on the x-axis
+     * and Total Spending on the y-axis
+     */
+
     const expenses = useSelector((state: RootState) => state.items);
-    const data = prepareData(expenses)
+    const data = prepareDataForChart(expenses);
 
     return (
         <ResponsiveContainer width='90%' height='90%'>
@@ -14,10 +19,10 @@ export default function D3() {
                 margin={{ top: 20, right: 20, left: 200, bottom: 20 }}
             >
                 <YAxis dataKey="sum">
-                    <Label value="Total cumulative costs" angle={-90} position="left" />
+                    <Label value="Total spending" angle={-90} position="left" fill='gray'/>
                 </YAxis>
                 <XAxis dataKey="day">
-                    <Label value="Day of the month" position="bottom" />
+                    <Label value="Days" position="bottom" fill='gray' />
                 </XAxis>
                 <Tooltip />
                 <Line type="monotone" dataKey="sum" stroke="#ff7300" yAxisId={0} />
