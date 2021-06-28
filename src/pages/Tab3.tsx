@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonItem, IonLabel, IonList, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonContent, IonHeader, IonItem, IonLabel, IonList, IonNote, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
 import './Tab3.css';
@@ -24,6 +24,7 @@ const Tab3: React.FC = () => {
             return (
               <IonItem>
                 <IonLabel>{expense.name}</IonLabel>
+                <IonNote slot='end'>{`$${expense.cost}.00`}</IonNote>
               </IonItem>
             )
           })}
