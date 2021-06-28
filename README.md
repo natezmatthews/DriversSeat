@@ -47,3 +47,6 @@ If you need to update `npm`, you can make it using `npm`! Cool right? After runn
 
 ### If there have not been any changes to the repository
 Simply run `npm start`!
+
+## Unit Tests
+As long as you have already run `npm install`, running the unit tests is just `npx jest`
