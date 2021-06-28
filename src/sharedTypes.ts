@@ -15,6 +15,7 @@ export enum Category {
 
 export interface Expense {
     name: string,
+    date: string,
     cost: number,
     category: Category,
     note: string

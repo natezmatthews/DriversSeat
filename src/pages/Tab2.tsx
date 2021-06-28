@@ -1,6 +1,7 @@
 import {
   IonButton,
   IonContent,
+  IonDatetime,
   IonHeader,
   IonInput,
   IonItem,
@@ -14,38 +15,20 @@ import {
   IonToolbar,
   useIonToast
 } from '@ionic/react';
-import { Dictionary, isInteger, isString } from 'lodash';
+import { isInteger, isString } from 'lodash';
 import React, { useState } from 'react';
+import unmetRequirements from '../helpers/unmetRequirements';
 import { recordExpense } from '../redux/expenses';
 import { AppDispatch, useAppDispatch } from '../redux/store';
 import { Category } from '../sharedTypes';
 import './Tab2.css';
-
-function validString(s: any): boolean {
-  return isString(s) && s.length > 0
-}
-
-interface ValueAndValidator<T> {
-  value: T,
-  validator: (v: T) => boolean
-}
-
-function unmetRequirements(fieldsToValidate: Dictionary<ValueAndValidator<any>>): string[] {
-  const message = [];
-  for (const field in fieldsToValidate) {
-    const { value, validator } = fieldsToValidate[field];
-    if (!validator(value)) {
-      message.push(field)
-    }
-  }
-  return message
-}
 
 function onClick(
   dispatch: AppDispatch,
   clearForm: () => void,
   presentToast: (message: string, duration: number) => void,
   name?: string,
+  date?: string,
   cost?: number,
   category?: Category,
   note?: string
@@ -53,7 +36,11 @@ function onClick(
   const fieldNames = unmetRequirements({
     'Name': {
       value: name,
-      validator: validString
+      validator: s => isString(s) && s.length > 0
+    },
+    'Date': {
+      value: date,
+      validator: s => isString(s) && s.length > 0
     },
     'Cost': {
       value: cost,
@@ -61,7 +48,7 @@ function onClick(
     },
     'Category': {
       value: category,
-      validator: (c) => Object.keys(Category).includes(c)
+      validator: c => Object.keys(Category).includes(c)
     }
   });
   if (fieldNames.length > 0) {
@@ -70,6 +57,7 @@ function onClick(
     dispatch(
       recordExpense({
         name: name!,
+        date: date!,
         cost: cost!,
         category: category!,
         note: note!
@@ -84,12 +72,14 @@ const Tab2: React.FC = () => {
   const [present, _] = useIonToast();
 
   const [name, setName] = useState<string>();
+  const [date, setDate] = useState<string>();
   const [cost, setCost] = useState<number>();
   const [category, setCategory] = useState<Category>();
   const [note, setNote] = useState<string>();
 
   function clearForm() {
     setName(undefined);
+    setDate(undefined);
     setCost(undefined);
     setCategory(undefined);
     setNote(undefined);
@@ -115,6 +105,11 @@ const Tab2: React.FC = () => {
           </IonItem>
 
           <IonItem>
+            <IonLabel>Date</IonLabel>
+            <IonDatetime value={date} onIonChange={e => setDate(e.detail.value!)} />
+          </IonItem>
+
+          <IonItem>
             <IonLabel>Cost</IonLabel>
             <IonInput type="number" value={cost} placeholder="Select Cost in Dollars" onIonChange={e => setCost(parseInt(e.detail.value!, 10))}></IonInput>
           </IonItem>
@@ -136,7 +131,18 @@ const Tab2: React.FC = () => {
           </IonItem>
         </IonList>
         <IonButton
-          onClick={() => onClick(dispatch, clearForm, present, name, cost, category, note)}
+          onClick={() =>
+            onClick(
+              dispatch,
+              clearForm,
+              present,
+              name,
+              date,
+              cost,
+              category,
+              note
+            )
+          }
         >
           Submit expense
         </IonButton>

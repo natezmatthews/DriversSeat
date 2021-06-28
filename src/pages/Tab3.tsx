@@ -24,6 +24,9 @@ const Tab3: React.FC = () => {
             return (
               <IonItem>
                 <IonLabel>{expense.name}</IonLabel>
+                <IonLabel>{expense.date}</IonLabel>
+                <IonLabel>{expense.category}</IonLabel>
+                <IonLabel>{expense.note}</IonLabel>
                 <IonNote slot='end'>{`$${expense.cost}.00`}</IonNote>
               </IonItem>
             )
