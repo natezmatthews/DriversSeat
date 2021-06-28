@@ -21,7 +21,7 @@ import unmetRequirements from '../helpers/unmetRequirements';
 import { recordExpense } from '../redux/expenses';
 import { AppDispatch, useAppDispatch } from '../redux/store';
 import { Category } from '../sharedTypes';
-import './Tab2.css';
+import './Form.css';
 
 function onClick(
   dispatch: AppDispatch,
@@ -67,7 +67,7 @@ function onClick(
   }
 }
 
-const Tab2: React.FC = () => {
+const Form: React.FC = () => {
   const dispatch = useAppDispatch();
   const [present, _] = useIonToast();
 
@@ -95,7 +95,7 @@ const Tab2: React.FC = () => {
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Tab 2</IonTitle>
+            <IonTitle size="large">Form</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonList>
@@ -151,4 +151,4 @@ const Tab2: React.FC = () => {
   );
 };
 
-export default Tab2;
+export default Form;

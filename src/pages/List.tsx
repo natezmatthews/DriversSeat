@@ -1,22 +1,22 @@
-import { IonContent, IonHeader, IonItem, IonLabel, IonList, IonNote, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonContent, IonHeader, IonItem, IonLabel, IonList, IonNote, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../redux/store';
-import './Tab3.css';
+import './List.css';
 
-const Tab3: React.FC = () => {
+const List: React.FC = () => {
   const expenses = useSelector((state: RootState) => state.items);
 
   return (
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Tab 3</IonTitle>
+          <IonTitle>List</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">Tab 3</IonTitle>
+            <IonTitle size="large">List</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonList>
@@ -32,9 +32,10 @@ const Tab3: React.FC = () => {
             )
           })}
         </IonList>
+        <IonButton routerLink='/form'>Add Expense</IonButton>
       </IonContent>
     </IonPage>
   );
 };
 
-export default Tab3;
+export default List;
