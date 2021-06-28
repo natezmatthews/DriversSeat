@@ -1,4 +1,3 @@
-import { Redirect, Route } from 'react-router-dom';
 import {
   IonApp,
   IonIcon,
@@ -6,32 +5,33 @@ import {
   IonRouterOutlet,
   IonTabBar,
   IonTabButton,
-  IonTabs,
+  IonTabs
 } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { ellipse, square, triangle } from 'ionicons/icons';
-import Graph from './pages/Graph';
-import Form from './pages/Form';
-import List from './pages/List';
-
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
-
+import '@ionic/react/css/display.css';
+import '@ionic/react/css/flex-utils.css';
+import '@ionic/react/css/float-elements.css';
 /* Basic CSS for apps built with Ionic */
 import '@ionic/react/css/normalize.css';
-import '@ionic/react/css/structure.css';
-import '@ionic/react/css/typography.css';
-
 /* Optional CSS utils that can be commented out */
 import '@ionic/react/css/padding.css';
-import '@ionic/react/css/float-elements.css';
+import '@ionic/react/css/structure.css';
 import '@ionic/react/css/text-alignment.css';
 import '@ionic/react/css/text-transformation.css';
-import '@ionic/react/css/flex-utils.css';
-import '@ionic/react/css/display.css';
-
+import '@ionic/react/css/typography.css';
+import { addCircleOutline, barChartOutline, listOutline } from 'ionicons/icons';
+import { Redirect, Route } from 'react-router-dom';
+import Form from './pages/Form';
+import Graph from './pages/Graph';
+import List from './pages/List';
 /* Theme variables */
 import './theme/variables.css';
+
+
+
+
 
 const App: React.FC = () => (
   <IonApp>
@@ -53,15 +53,15 @@ const App: React.FC = () => (
         </IonRouterOutlet>
         <IonTabBar slot="bottom">
           <IonTabButton tab="list" href="/list">
-            <IonIcon icon={ellipse} />
+            <IonIcon icon={listOutline} />
             <IonLabel>List</IonLabel>
           </IonTabButton>
           <IonTabButton tab="form" href="/form">
-            <IonIcon icon={square} />
-            <IonLabel>Form</IonLabel>
+            <IonIcon icon={addCircleOutline} />
+            <IonLabel>Add Expense</IonLabel>
           </IonTabButton>
           <IonTabButton tab="graph" href="/graph">
-            <IonIcon icon={triangle} />
+            <IonIcon icon={barChartOutline} />
             <IonLabel>Graph</IonLabel>
           </IonTabButton>
         </IonTabBar>

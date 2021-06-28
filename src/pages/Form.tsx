@@ -89,7 +89,7 @@ const Form: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>Enter Expense</IonTitle>
+          <IonTitle>Add Expense</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
@@ -111,7 +111,7 @@ const Form: React.FC = () => {
 
           <IonItem>
             <IonLabel>Cost</IonLabel>
-            <IonInput type="number" value={cost} placeholder="Select Cost in Dollars" onIonChange={e => setCost(parseInt(e.detail.value!, 10))}></IonInput>
+            <IonInput type="number" value={cost} placeholder="Enter Cost in Dollars" onIonChange={e => setCost(parseInt(e.detail.value!, 10))}></IonInput>
           </IonItem>
 
           <IonItem>

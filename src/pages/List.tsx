@@ -1,5 +1,14 @@
-import { IonButton, IonContent, IonHeader, IonItem, IonLabel, IonList, IonNote, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import {
+  IonButton,
+  IonContent,
+  IonHeader,
+  IonList,
+  IonPage,
+  IonTitle,
+  IonToolbar
+} from '@ionic/react';
 import { useSelector } from 'react-redux';
+import ExpenseCard from '../components/ExpenseCard';
 import { RootState } from '../redux/store';
 import './List.css';
 
@@ -10,27 +19,17 @@ const List: React.FC = () => {
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <IonTitle>List</IonTitle>
+          <IonTitle>List of Expenses</IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent fullscreen>
         <IonHeader collapse="condense">
           <IonToolbar>
-            <IonTitle size="large">List</IonTitle>
+            <IonTitle size="large">List of Expenses</IonTitle>
           </IonToolbar>
         </IonHeader>
         <IonList>
-          {expenses.map(expense => {
-            return (
-              <IonItem>
-                <IonLabel>{expense.name}</IonLabel>
-                <IonLabel>{expense.date}</IonLabel>
-                <IonLabel>{expense.category}</IonLabel>
-                <IonLabel>{expense.note}</IonLabel>
-                <IonNote slot='end'>{`$${expense.cost}.00`}</IonNote>
-              </IonItem>
-            )
-          })}
+          {expenses.map(expense => <ExpenseCard expense={expense} />)}
         </IonList>
         <IonButton routerLink='/form'>Add Expense</IonButton>
       </IonContent>
