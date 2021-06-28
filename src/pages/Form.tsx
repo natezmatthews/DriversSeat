@@ -15,7 +15,7 @@ import {
   IonToolbar,
   useIonToast
 } from '@ionic/react';
-import { isInteger, isString } from 'lodash';
+import { isNumber, isString } from 'lodash';
 import React, { useState } from 'react';
 import unmetRequirements from '../helpers/unmetRequirements';
 import { recordExpense } from '../redux/expenses';
@@ -44,7 +44,7 @@ function onClick(
     },
     'Cost': {
       value: cost,
-      validator: isInteger
+      validator: isNumber
     },
     'Category': {
       value: category,
@@ -111,7 +111,7 @@ const Form: React.FC = () => {
 
           <IonItem>
             <IonLabel>Cost</IonLabel>
-            <IonInput type="number" value={cost} placeholder="Enter Cost in Dollars" onIonChange={e => setCost(parseInt(e.detail.value!, 10))}></IonInput>
+            <IonInput type="number" value={cost} placeholder="Enter Cost in Dollars" onIonChange={e => setCost(parseFloat(e.detail.value!))}></IonInput>
           </IonItem>
 
           <IonItem>
